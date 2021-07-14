@@ -10,14 +10,18 @@ function App() {
       return "rgb(246, 6, 6)";
     }
   }
-  async function CheckServer() {
-    await fetch("http://127.0.0.1:5000/5").then((res) => {
-      setStatus(res.status);
-    });
+   function CheckServer() {
+       fetch("http://127.0.0.1:5000").then((res) => {
+         if(res.ok){setStatus(res.status)}
+        
+      }).catch((err)=>{
+        console.log("catch");
+        setStatus(404)
+      });
   }
-
-  CheckServer();
-
+setInterval(function(){CheckServer()} ,60000)
+  // clearInterval()
+console.log("status",status);
   return (
     <div className="body">
       <div className="logoLeumi"></div>
